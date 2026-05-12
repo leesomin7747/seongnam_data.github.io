@@ -19,7 +19,9 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run build # 빌드 결과물이 'dist' 폴더에 생성된다고 가정
+          npm run build
+        env:
+          VITE_BASE_PATH: ${{ github.ref == 'refs/heads/master' && '/seongnam_data.github.io/' || '/seongnam_data.github.io/dev/' }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

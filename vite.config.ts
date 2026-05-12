@@ -20,7 +20,7 @@ function figmaAssetResolver() {
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production'
-    ? '/seongnam_data.github.io/'
+    ? (process.env.VITE_BASE_PATH ?? '/seongnam_data.github.io/')
     : '/',
   plugins: [
     figmaAssetResolver(),
