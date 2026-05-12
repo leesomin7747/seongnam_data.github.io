@@ -74,16 +74,16 @@ function PopCard({
 
   return (
     <div
-      className={`relative bg-gradient-to-br ${gradient} rounded-3xl p-6 shadow-sm ${border} cursor-default`}
+      className={`relative bg-gradient-to-br ${gradient} rounded-2xl p-3 shadow-sm ${border} cursor-default sm:rounded-3xl sm:p-6`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div className="flex flex-col items-center text-center">
-        <div className={`w-12 h-12 ${iconBg} rounded-2xl flex items-center justify-center mb-3`}>
+        <div className={`w-8 h-8 ${iconBg} rounded-xl flex items-center justify-center mb-2 sm:w-12 sm:h-12 sm:rounded-2xl sm:mb-3`}>
           {icon}
         </div>
-        <p className="text-xs text-gray-500 mb-2">{label}</p>
-        <p className="text-2xl font-semibold text-gray-900">{value}만</p>
+        <p className="text-xs text-gray-500 mb-1 sm:mb-2">{label}</p>
+        <p className="text-base font-semibold text-gray-900 sm:text-2xl">{value}만</p>
       </div>
 
       {hovered && (
@@ -117,33 +117,33 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-8 py-12">
-        <div className="flex items-center justify-between mb-8">
+      <div className="max-w-7xl mx-auto px-4 py-8 md:px-8 md:py-12">
+        <div className="flex flex-col gap-3 mb-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+            <h1 className="text-2xl font-semibold text-gray-900 mb-2 sm:text-3xl">
               성남시 공공시설 수요 분석
             </h1>
-            <p className="text-gray-500">각 동을 클릭하여 상세 분석을 확인하세요</p>
+            <p className="text-gray-500 text-sm sm:text-base">각 동을 클릭하여 상세 분석을 확인하세요</p>
           </div>
           <Link
             to="/overview"
-            className="px-6 py-3 bg-sky-500 text-white rounded-full font-medium hover:bg-sky-600 transition-colors"
+            className="self-start px-5 py-2.5 bg-sky-500 text-white rounded-full font-medium hover:bg-sky-600 transition-colors text-sm sm:self-auto sm:px-6 sm:py-3 sm:text-base"
           >
             한눈에 보기
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           <div className="space-y-4">
-            <div className="bg-gradient-to-br from-sky-50 to-white rounded-3xl p-8 shadow-sm border border-sky-100" style={{ minHeight: "280px" }}>
+            <div className="bg-gradient-to-br from-sky-50 to-white rounded-3xl p-6 shadow-sm border border-sky-100 sm:p-8">
               <div className="flex flex-col justify-center h-full">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-16 h-16 bg-sky-500 rounded-2xl flex items-center justify-center">
-                    <Users className="w-8 h-8 text-white" />
+                  <div className="w-12 h-12 bg-sky-500 rounded-2xl flex items-center justify-center sm:w-16 sm:h-16">
+                    <Users className="w-6 h-6 text-white sm:w-8 sm:h-8" />
                   </div>
                   <div>
                     <p className="text-base text-gray-500">총 인구</p>
-                    <p className="text-5xl font-semibold text-gray-900">
+                    <p className="text-3xl font-semibold text-gray-900 sm:text-5xl">
                       {totalPopulation.toLocaleString()}명
                     </p>
                   </div>
@@ -151,7 +151,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-2 md:gap-4">
               <PopCard
                 icon={<Baby className="w-6 h-6 text-white" />}
                 label="아동 인구"
@@ -188,8 +188,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-3xl p-8 shadow-sm border border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">성남시 행정구역 지도</h2>
+          <div className="bg-gray-50 rounded-3xl p-4 shadow-sm border border-gray-200 sm:p-8">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:text-xl sm:mb-6">성남시 행정구역 지도</h2>
             <Map />
           </div>
         </div>

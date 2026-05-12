@@ -57,27 +57,27 @@ export default function Overview() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-8 md:px-8 md:py-12">
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 md:mb-8 transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>돌아가기</span>
         </button>
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">한눈에 보기</h1>
-          <p className="text-gray-500">성남시 공공시설 수요 현황을 한눈에 파악하세요</p>
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-2xl font-semibold text-gray-900 mb-2 sm:text-3xl">한눈에 보기</h1>
+          <p className="text-gray-500 text-sm sm:text-base">성남시 공공시설 수요 현황을 한눈에 파악하세요</p>
         </div>
 
         {/* 카테고리 탭 */}
-        <div className="flex gap-3 mb-8">
+        <div className="flex flex-wrap gap-2 mb-6 md:gap-3 md:mb-8">
           {CATEGORIES.map((c) => (
             <button
               key={c.key}
               onClick={() => setActiveCategory(c.key)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm transition-all border ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all border sm:px-5 sm:py-2.5 ${
                 activeCategory === c.key
                   ? `${c.dotBg} text-white border-transparent shadow-md`
                   : `bg-white ${c.color} ${c.border} hover:shadow-sm`
@@ -89,10 +89,10 @@ export default function Overview() {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           {/* 과잉 지역 */}
           <div className="space-y-4">
-            <div className={`bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 shadow-sm border border-blue-100`}>
+            <div className={`bg-gradient-to-br from-blue-50 to-white rounded-3xl p-4 shadow-sm border border-blue-100 sm:p-8`}>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-gray-900">시설 과잉 지역</h2>
                 <div className="flex items-center gap-2">
@@ -128,7 +128,7 @@ export default function Overview() {
 
           {/* 부족 지역 */}
           <div className="space-y-4">
-            <div className="bg-gradient-to-br from-red-50 to-white rounded-3xl p-8 shadow-sm border border-red-100">
+            <div className="bg-gradient-to-br from-red-50 to-white rounded-3xl p-4 shadow-sm border border-red-100 sm:p-8">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-gray-900">시설 부족 지역</h2>
                 <div className="flex items-center gap-2">
