@@ -101,7 +101,7 @@ export default function Overview() {
                 </div>
               </div>
 
-              <div className="mb-6 overflow-hidden rounded-2xl" style={{ height: "550px" }}>
+              <div className="mb-6 overflow-hidden rounded-2xl">
                 <Map interactive={false} highlightMode="excess" category={activeCategory} />
               </div>
 
@@ -137,7 +137,7 @@ export default function Overview() {
                 </div>
               </div>
 
-              <div className="mb-6 overflow-hidden rounded-2xl" style={{ height: "550px" }}>
+              <div className="mb-6 overflow-hidden rounded-2xl">
                 <Map interactive={false} highlightMode="shortage" category={activeCategory} />
               </div>
 
