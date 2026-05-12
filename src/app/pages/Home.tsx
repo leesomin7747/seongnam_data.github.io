@@ -1,15 +1,44 @@
 import { Link } from "react-router";
+import { useEffect, useState } from "react";
 import Map from "../components/Map";
 import {
-  getTotalPopulation,
   getTotalChildren,
   getTotalYouth,
   getTotalElderly,
 } from "../data/dongData";
 import { Users, Baby, Briefcase, Heart } from "lucide-react";
 
+const TARGET_POPULATION = 905493;
+
+function useCountUp(target: number, duration = 2000) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const steps = 80;
+    const interval = duration / steps;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      // easeOutQuad: 처음엔 빠르게, 끝에서 부드럽게
+      const progress = step / steps;
+      const eased = 1 - (1 - progress) * (1 - progress);
+      setCount(Math.floor(eased * target));
+
+      if (step >= steps) {
+        setCount(target);
+        clearInterval(timer);
+      }
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [target, duration]);
+
+  return count;
+}
+
 export default function Home() {
-  const totalPopulation = getTotalPopulation();
+  const totalPopulation = useCountUp(TARGET_POPULATION);
   const totalChildren = getTotalChildren();
   const totalYouth = getTotalYouth();
   const totalElderly = getTotalElderly();
@@ -45,7 +74,7 @@ export default function Home() {
                   <div>
                     <p className="text-base text-gray-500">총 인구</p>
                     <p className="text-5xl font-semibold text-gray-900">
-                      {(totalPopulation / 10000).toFixed(0)}만 명
+                      {totalPopulation.toLocaleString()}명
                     </p>
                   </div>
                 </div>
