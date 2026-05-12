@@ -36,7 +36,7 @@ export default function Overview() {
                 </div>
               </div>
 
-              <div className="h-96 mb-6">
+              <div className="h-96 mb-6 overflow-hidden rounded-2xl">
                 <Map interactive={false} highlightMode="excess" />
               </div>
 
@@ -81,7 +81,7 @@ export default function Overview() {
                 </div>
               </div>
 
-              <div className="h-96 mb-6">
+              <div className="h-96 mb-6 overflow-hidden rounded-2xl">
                 <Map interactive={false} highlightMode="shortage" />
               </div>
 
