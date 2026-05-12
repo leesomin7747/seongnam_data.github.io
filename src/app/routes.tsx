@@ -3,7 +3,9 @@ import Home from "./pages/Home";
 import DistrictAnalysis from "./pages/DistrictAnalysis";
 import Overview from "./pages/Overview";
 
-const basename = import.meta.env.PROD ? "/seongnam_data.github.io" : "/";
+const basename = import.meta.env.PROD
+  ? (import.meta.env.VITE_BASE_PATH?.replace(/\/$/, '') ?? '/seongnam_data.github.io')
+  : '/';
 
 export const router = createBrowserRouter(
   [
