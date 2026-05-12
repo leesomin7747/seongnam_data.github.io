@@ -12,9 +12,6 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref == 'refs/heads/master' && 'github-pages' || 'github-pages-dev' }}
-      url: ${{ github.ref == 'refs/heads/master' && 'https://coketazo.github.io/seongnam_data.github.io/' || 'https://coketazo.github.io/seongnam_data.github.io/dev/' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
