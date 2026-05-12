@@ -3,17 +3,22 @@ import Home from "./pages/Home";
 import DistrictAnalysis from "./pages/DistrictAnalysis";
 import Overview from "./pages/Overview";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    Component: Home,
-  },
-  {
-    path: "/district/:districtId",
-    Component: DistrictAnalysis,
-  },
-  {
-    path: "/overview",
-    Component: Overview,
-  },
-]);
+const basename = import.meta.env.PROD ? "/seongnam_data.github.io" : "/";
+
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      Component: Home,
+    },
+    {
+      path: "/district/:districtId",
+      Component: DistrictAnalysis,
+    },
+    {
+      path: "/overview",
+      Component: Overview,
+    },
+  ],
+  { basename }
+);
