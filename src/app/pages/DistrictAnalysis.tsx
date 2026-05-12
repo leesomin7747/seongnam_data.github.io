@@ -50,21 +50,21 @@ export default function DistrictAnalysis() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-5xl mx-auto px-8 py-12">
+      <div className="max-w-5xl mx-auto px-4 py-8 md:px-8 md:py-12">
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 md:mb-8 transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>돌아가기</span>
         </button>
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">{dong.name} 시설 수요 분석</h1>
-          <p className="text-gray-500">{dong.district} · 총 인구 {(dong.population.total / 10000).toFixed(1)}만 명</p>
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-2xl font-semibold text-gray-900 mb-2 sm:text-3xl">{dong.name} 시설 수요 분석</h1>
+          <p className="text-gray-500 text-sm sm:text-base">{dong.district} · 총 인구 {(dong.population.total / 10000).toFixed(1)}만 명</p>
         </div>
 
-        <div className="bg-gradient-to-br from-sky-50 to-white rounded-3xl p-8 shadow-sm border border-sky-100 mb-8">
+        <div className="bg-gradient-to-br from-sky-50 to-white rounded-3xl p-4 shadow-sm border border-sky-100 mb-6 sm:p-8 sm:mb-8">
           <div className="flex items-center gap-2 mb-6">
             <TrendingUp className="w-5 h-5 text-sky-600" />
             <h2 className="text-xl font-semibold text-gray-900">시설 수요 점수</h2>
@@ -91,18 +91,18 @@ export default function DistrictAnalysis() {
         <div className="space-y-4">
           <div className="flex items-center gap-2 mb-4">
             <AlertCircle className="w-5 h-5 text-sky-600" />
-            <h2 className="text-xl font-semibold text-gray-900">정책 제안</h2>
+            <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">정책 제안</h2>
           </div>
 
           {recommendations.length === 0 ? (
-            <div className="bg-gray-50 rounded-3xl p-8 text-center">
+            <div className="bg-gray-50 rounded-3xl p-6 text-center sm:p-8">
               <p className="text-gray-500">현재 특별한 정책 제안이 없습니다</p>
             </div>
           ) : (
             recommendations.map((rec, index) => (
               <div
                 key={index}
-                className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+                className="bg-white rounded-3xl p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow sm:p-6"
               >
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-lg font-semibold text-gray-900">{rec.title}</h3>
@@ -114,16 +114,16 @@ export default function DistrictAnalysis() {
           )}
         </div>
 
-        <div className="mt-8 grid grid-cols-3 gap-4">
-          <div className="bg-pink-50 rounded-2xl p-6 border border-pink-100">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-3 sm:gap-4">
+          <div className="bg-pink-50 rounded-2xl p-4 border border-pink-100 sm:p-6">
             <p className="text-sm text-pink-700 mb-1">아동 시설</p>
             <p className="text-2xl font-semibold text-pink-900">{dong.facilities.childcare}개</p>
           </div>
-          <div className="bg-purple-50 rounded-2xl p-6 border border-purple-100">
+          <div className="bg-purple-50 rounded-2xl p-4 border border-purple-100 sm:p-6">
             <p className="text-sm text-purple-700 mb-1">청년 시설</p>
             <p className="text-2xl font-semibold text-purple-900">{dong.facilities.youthCenter}개</p>
           </div>
-          <div className="bg-orange-50 rounded-2xl p-6 border border-orange-100">
+          <div className="bg-orange-50 rounded-2xl p-4 border border-orange-100 sm:p-6">
             <p className="text-sm text-orange-700 mb-1">노인 시설</p>
             <p className="text-2xl font-semibold text-orange-900">{dong.facilities.elderlyCenter}개</p>
           </div>
