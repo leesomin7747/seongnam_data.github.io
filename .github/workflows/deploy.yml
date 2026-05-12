@@ -1,0 +1,31 @@
+name: Multi-Branch Deploy
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build # 빌드 결과물이 'dist' 폴더에 생성된다고 가정
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # 배포용 브랜치 고정
+          folder: dist # 빌드된 결과물이 있는 폴더
+          # main 브랜치면 루트(.)에, dev 브랜치면 dev 폴더에 배포
+          target-folder: ${{ github.ref == 'refs/heads/master' && '.' || 'dev' }}
+          clean: ${{ github.ref == 'refs/heads/master' }} # main 배포 시에만 기존 파일 정리
