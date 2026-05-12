@@ -9,6 +9,7 @@ const STORAGE_KEY = "sn_hot_overrides_v1";
 interface MapProps {
   interactive?: boolean;
   highlightMode?: "excess" | "shortage" | null;
+  category?: "children" | "youth" | "elderly";
 }
 
 const copy = (text: string) => {
@@ -24,7 +25,7 @@ const copy = (text: string) => {
   if (!ok) navigator.clipboard?.writeText(text).catch(() => {});
 };
 
-export default function Map({ interactive = true, highlightMode = null }: MapProps) {
+export default function Map({ interactive = true, highlightMode = null, category }: MapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState<Dong | null>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -110,9 +111,17 @@ export default function Map({ interactive = true, highlightMode = null }: MapPro
     alert(`${lines.length}개 동 좌표가 클립보드에 복사되었습니다.`);
   };
 
+  const getCategoryStatus = (dong: Dong) => {
+    if (!category) return getFacilityStatus(dong);
+    const score = dong.demand[category];
+    if (score > 80) return "shortage";
+    if (score < 70) return "excess";
+    return "normal";
+  };
+
   const getDotColor = (dong: Dong) => {
-    const status = getFacilityStatus(dong);
     if (calibMode) return "#f59e0b";
+    const status = getCategoryStatus(dong);
     if (!highlightMode) return hover?.id === dong.id ? "#0EA5E9" : "#3b82f6";
     if (highlightMode === "shortage") return status === "shortage" ? "#ef4444" : "#94a3b8";
     if (highlightMode === "excess")   return status === "excess"   ? "#3b82f6" : "#94a3b8";
@@ -179,7 +188,6 @@ export default function Map({ interactive = true, highlightMode = null }: MapPro
               onClick={() => { if (interactive && !calibMode) navigate(`/district/${dong.id}`); }}
               onMouseDown={(e) => onDotMouseDown(e, dong)}
             >
-              {/* 항상 보이는 외곽 halo 링 */}
               {!calibMode && (
                 <div
                   className="absolute rounded-full pointer-events-none transition-all duration-150"
@@ -194,7 +202,6 @@ export default function Map({ interactive = true, highlightMode = null }: MapPro
                 />
               )}
 
-              {/* 호버 시 ping 애니메이션 */}
               {isHovered && !calibMode && (
                 <span
                   className="absolute rounded-full animate-ping pointer-events-none"
@@ -209,7 +216,6 @@ export default function Map({ interactive = true, highlightMode = null }: MapPro
                 />
               )}
 
-              {/* 내부 dot */}
               <div
                 className="rounded-full transition-all duration-150"
                 style={{
@@ -262,7 +268,6 @@ export default function Map({ interactive = true, highlightMode = null }: MapPro
           );
         })}
 
-        {/* 호버 툴팁 */}
         {hover && interactive && !calibMode && (() => {
           const W = wrapRef.current?.clientWidth ?? 600;
           const H = wrapRef.current?.clientHeight ?? 690;
@@ -291,14 +296,12 @@ export default function Map({ interactive = true, highlightMode = null }: MapPro
           );
         })()}
 
-        {/* 캘리브레이션 모드 안내 배너 */}
         {calibMode && (
           <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-semibold px-4 py-2 rounded-full shadow z-30 pointer-events-none">
             캘리브레이션 모드 — 핫스팟을 드래그해서 위치 조정
           </div>
         )}
 
-        {/* 캘리브레이션 액션 버튼 */}
         {calibMode && (
           <div className="absolute bottom-3 right-3 flex flex-col gap-2 z-30">
             <button
@@ -317,7 +320,6 @@ export default function Map({ interactive = true, highlightMode = null }: MapPro
         )}
       </div>
 
-      {/* 캘리브레이션 토글 버튼 — interactive 모드에서만 표시 */}
       {interactive && (
         <button
           onClick={() => setCalibMode((v) => !v)}
